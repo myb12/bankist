@@ -1,6 +1,5 @@
 'use strict';
 
-///////////////////////////////////////
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -33,7 +32,7 @@ tabsContainer.addEventListener('click', function (e) {
 //////////////
 
 //////////////
-//Menu fade animation
+//==============Menu fade animation==============//
 const hoverHandle = function (e) {
   if (e.target.classList.contains('nav__link')) {
     // console.log(e.target);
@@ -54,7 +53,7 @@ nav.addEventListener('mouseout', hoverHandle.bind(1));
 //////////////
 
 //////////////
-//stickyNavigation
+//==============stickyNavigation==============//
 
 const navHeight = nav.getBoundingClientRect().height;
 
@@ -74,7 +73,7 @@ headerObserver.observe(header);
 //////////////
 
 //////////////
-//section revealing
+//==============section revealing==============//
 const allSections = document.querySelectorAll('.section');
 const revealSection = function (entries, observer) {
   const [entry] = entries;
@@ -95,10 +94,11 @@ allSections.forEach(function (section) {
 //////////////
 
 //////////////
-//Lazy Loading Image
+//==============Lazy Loading Image==============//
 const imgTargets = document.querySelectorAll('img[data-src]');
 const loadImg = function (entries, observere) {
   const [entry] = entries;
+  if (!entry.isIntersecting) return;
   entry.target.src = entry.target.dataset.src;
   entry.target.addEventListener('load', function () {
     entry.target.classList.remove('lazy-img');
@@ -115,7 +115,7 @@ imgTargets.forEach(img => imgObserver.observe(img));
 //////////////
 
 //////////////
-//slider
+//==============slider==============//
 const slider = function () {
   const slides = document.querySelectorAll('.slide');
   const slider = document.querySelector('.slider');
@@ -190,6 +190,8 @@ const slider = function () {
       activateDot(slide);
     }
   });
+
+  setInterval(nextSlide, 5000);
 };
 slider();
 
@@ -218,7 +220,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Button scrolling
+//==============Button scrolling==============//
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
   console.log(s1coords);
@@ -236,7 +238,7 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-// Event Delegation
+//==============Page navigation with Event Delegation ==============//
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
   if (e.target.classList.contains('nav__link')) {
